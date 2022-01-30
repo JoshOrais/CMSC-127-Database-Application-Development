@@ -24,10 +24,6 @@ public class SqlQueries {
                sqlUser, sqlPassword);
             Statement stmt = conn.createStatement();
         ) {
-            //comment
-            System.out.println("JDBC Connection made!");
-            //
-
             ResultSet rset;
             for (int i=1; i<=10; i++) {
                 String questionQuery = "SELECT question_content FROM categories, questions WHERE categories.category_ID=questions.category_ID AND name='" + category + "' AND item=" + i;
@@ -69,9 +65,13 @@ public class SqlQueries {
         ) {
             ResultSet rset;
 
-            String checkQuery = "SELECT answer FROM categories, choices WHERE categories.category_ID=choices.category_ID AND name='" + category + "'" + "AND item=" + item + "AND letter='"+choice+"'";
+            String checkQuery = "SELECT answer FROM categories, choices WHERE categories.category_ID=choices.category_ID AND name='" + category + "'" + " AND item=" + item + " AND letter = '"+choice+"'";
             rset = stmt.executeQuery(checkQuery);
-            int correctness = rset.getInt("answer");
+
+            int correctness = 0;
+            while(rset.next()){
+                correctness = rset.getInt("answer");
+            }
 
             if (correctness != 0) {
                 return true;
@@ -84,7 +84,11 @@ public class SqlQueries {
                                         " AND item=" + item +
                                         " AND answer=1";
                 rset = stmt.executeQuery(getCorrect);
-                correctAnswer = rset.getString("choice_content");
+
+                while(rset.next()){
+                    correctAnswer = rset.getString("choice_content");
+                }
+                
             }
 
         } catch(SQLException ex) {

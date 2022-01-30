@@ -8,8 +8,6 @@ public class DatabaseApplicationDevelopment {
         Scanner scan = new Scanner (System.in);
 
         SqlQueries queries = new SqlQueries("joshuaOrais", "joshuaOrais");
-        
-        System.out.println("SQL Queries object generated");
 
         queries.queryForDisplay("Music");
         String[] questions = queries.getQuestions();
@@ -22,12 +20,12 @@ public class DatabaseApplicationDevelopment {
 
         System.out.print("Your answer is: ");
         char answer = scan.next().charAt(0);
-        // boolean correct = queries.checkAnswer("Music", 1, answer);
-        // if (correct){
-        //     System.out.println("Your answer is CORRECT!!!");
-        // }
-        // else {
-        //     System.out.println("The correct answer is " + queries.getCorrectAnswer());
-        // }
+        boolean correct = queries.checkAnswer("Music", 1, answer);
+        if (correct){
+            System.out.println("Your answer is CORRECT!!!");
+        }
+        else {
+            System.out.println("The correct answer is " + queries.getCorrectAnswer());
+        }
     }
 }
