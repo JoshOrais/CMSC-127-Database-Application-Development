@@ -1,21 +1,33 @@
-import java.sql.*;
+import java.util.Scanner;
 
 public class DatabaseApplicationDevelopment {
+
     public DatabaseApplicationDevelopment() {
+        System.out.println("START");
 
-        try (
-            Connection conn = DriverManager.getConnection(
-               "jdbc:mysql://localhost:3306/ebookshop?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
-               "joshuaOrais", "joshuaOrais");
-            Statement stmt = conn.createStatement();
-        ) {
+        Scanner scan = new Scanner (System.in);
 
-            //code here
-            
-        } catch(SQLException ex) {
-            ex.printStackTrace();
-        } 
+        SqlQueries queries = new SqlQueries("joshuaOrais", "joshuaOrais");
+        
+        System.out.println("SQL Queries object generated");
 
+        queries.queryForDisplay("Music");
+        String[] questions = queries.getQuestions();
+        String[][] choices = queries.getChoices();
 
+        System.out.println(questions[0]);
+        for (int i=0; i<4; i++) {
+            System.out.println("\t" + choices[0][i]);
+        }
+
+        System.out.print("Your answer is: ");
+        char answer = scan.next().charAt(0);
+        // boolean correct = queries.checkAnswer("Music", 1, answer);
+        // if (correct){
+        //     System.out.println("Your answer is CORRECT!!!");
+        // }
+        // else {
+        //     System.out.println("The correct answer is " + queries.getCorrectAnswer());
+        // }
     }
 }
