@@ -1,5 +1,9 @@
 public class MainClass {
     public static void main (String[] args) {
-        new DatabaseApplicationDevelopment();
+
+        String sqlUser = "joshuaOrais";
+        String sqlPassword = "joshuaOrais";
+
+        new DatabaseApplicationDevelopment(sqlUser, sqlPassword);
     }
 }
